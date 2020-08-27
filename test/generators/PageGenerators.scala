@@ -21,6 +21,9 @@ import pages._
 
 trait PageGenerators {
 
+  implicit lazy val arbitraryEothoNumberOfEstablishmentsPage: Arbitrary[EothoNumberOfEstablishmentsPage.type] =
+    Arbitrary(EothoNumberOfEstablishmentsPage)
+
   implicit lazy val arbitraryGiveReasonPage: Arbitrary[GiveReasonPage.type] =
     Arbitrary(GiveReasonPage)
 

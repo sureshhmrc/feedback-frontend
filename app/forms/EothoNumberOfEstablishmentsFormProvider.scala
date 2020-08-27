@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package utils
+package forms
 
-import controllers.routes
-import models.{CheckMode, UserAnswers}
-import pages.EothoNumberOfEstablishmentsPage
-import viewmodels.AnswerRow
+import javax.inject.Inject
 
-class CheckYourAnswersHelper(userAnswers: UserAnswers) {
+import forms.mappings.Mappings
+import play.api.data.Form
+import models.EothoNumberOfEstablishments
 
-  def eothoNumberOfEstablishments: Option[AnswerRow] = userAnswers.get(EothoNumberOfEstablishmentsPage) map { x =>
-    AnswerRow(
-      "eothoNumberOfEstablishments.checkYourAnswersLabel",
-      s"eothoNumberOfEstablishments.$x",
-      true,
-      routes.EothoNumberOfEstablishmentsController.onPageLoad(CheckMode).url
+class EothoNumberOfEstablishmentsFormProvider @Inject() extends Mappings {
+
+  def apply(): Form[EothoNumberOfEstablishments] =
+    Form(
+      "value" -> enumerable[EothoNumberOfEstablishments]("eothoNumberOfEstablishments.error.required")
     )
-  }
 }

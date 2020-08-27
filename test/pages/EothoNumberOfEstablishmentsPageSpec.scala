@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package utils
+package pages
 
-import controllers.routes
-import models.{CheckMode, UserAnswers}
-import pages.EothoNumberOfEstablishmentsPage
-import viewmodels.AnswerRow
+import models.EothoNumberOfEstablishments
+import pages.behaviours.PageBehaviours
 
-class CheckYourAnswersHelper(userAnswers: UserAnswers) {
+class EothoNumberOfEstablishmentsSpec extends PageBehaviours {
 
-  def eothoNumberOfEstablishments: Option[AnswerRow] = userAnswers.get(EothoNumberOfEstablishmentsPage) map { x =>
-    AnswerRow(
-      "eothoNumberOfEstablishments.checkYourAnswersLabel",
-      s"eothoNumberOfEstablishments.$x",
-      true,
-      routes.EothoNumberOfEstablishmentsController.onPageLoad(CheckMode).url
-    )
+  "YourLocation" must {
+
+    beRetrievable[EothoNumberOfEstablishments](EothoNumberOfEstablishmentsPage)
+
+    beSettable[EothoNumberOfEstablishments](EothoNumberOfEstablishmentsPage)
+
+    beRemovable[EothoNumberOfEstablishments](EothoNumberOfEstablishmentsPage)
   }
 }

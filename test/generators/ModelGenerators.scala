@@ -26,6 +26,11 @@ import play.api.test.FakeRequest
 
 trait ModelGenerators {
 
+  implicit lazy val arbitraryEothoNumberOfEstablishments: Arbitrary[EothoNumberOfEstablishments] =
+    Arbitrary {
+      Gen.oneOf(EothoNumberOfEstablishments.values.toSeq)
+    }
+
   implicit lazy val arbitraryGiveReason: Arbitrary[GiveReason] =
     Arbitrary {
       Gen.oneOf(GiveReason.values)

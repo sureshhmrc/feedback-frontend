@@ -35,6 +35,12 @@ GET        /:origin/thank-you                           controllers.ThankYouCont
 GET        /thank-you                                   controllers.ThankYouController.onPageLoad()
 GET        /thank-you-pension                           controllers.ThankYouController.onPageLoadPension()
 
+GET        /eothoNumberOfEstablishments                 controllers.EothoNumberOfEstablishmentsController.onPageLoad(mode: Mode = NormalMode)
+POST       /eothoNumberOfEstablishments                 controllers.EothoNumberOfEstablishmentsController.onSubmit(mode: Mode = NormalMode)
+GET        /changeEothoNumberOfEstablishments           controllers.EothoNumberOfEstablishmentsController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeEothoNumberOfEstablishments           controllers.EothoNumberOfEstablishmentsController.onSubmit(mode: Mode = CheckMode)
+
 # These routes must come last as they will match any /feedback/xxx route
 GET        /:origin                                     controllers.OtherQuestionsController.onPageLoad(origin: models.Origin)
 POST       /:origin                                     controllers.OtherQuestionsController.onSubmit(origin: models.Origin)
+

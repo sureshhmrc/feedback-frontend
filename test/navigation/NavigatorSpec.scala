@@ -44,4 +44,30 @@ class NavigatorSpec extends SpecBase with MockitoSugar {
       }
     }
   }
+
+  val eothoNavigator = new EothoNavigator
+
+  "EothoNavigator" when {
+
+    "in Normal mode" must {
+
+      "go to First question from a page that doesn't exist in the route map" in {
+
+        case object UnknownPage extends Page
+        eothoNavigator
+          .nextPage(UnknownPage, NormalMode, UserAnswers("id")) mustBe routes.EothoNumberOfEstablishmentsController
+          .onPageLoad(NormalMode)
+      }
+    }
+
+    "in Check mode" must {
+
+      "go to CheckYourAnswers from a page that doesn't exist in the edit route map" in {
+
+        case object UnknownPage extends Page
+        eothoNavigator.nextPage(UnknownPage, CheckMode, UserAnswers("id")) mustBe routes.CheckYourAnswersController
+          .onPageLoad()
+      }
+    }
+  }
 }
