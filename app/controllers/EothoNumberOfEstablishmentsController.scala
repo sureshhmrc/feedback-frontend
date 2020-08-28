@@ -48,7 +48,6 @@ class EothoNumberOfEstablishmentsController @Inject()(
   val form = formProvider()
 
   def onPageLoad(mode: Mode) = (identify andThen getData) { implicit request =>
-    println("*" * 50)
     val preparedForm =
       request.userAnswers.getOrElse(UserAnswers(request.internalId)).get(EothoNumberOfEstablishmentsPage) match {
         case None        => form

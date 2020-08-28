@@ -1,46 +1,51 @@
 # microservice specific routes
 
-GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                             controllers.Assets.versioned(path="/public", file: Asset)
 
-GET        /language/:lang                              controllers.LanguageSwitchController.switchToLanguage(lang: String)
+GET         /language/:lang                           controllers.LanguageSwitchController.switchToLanguage(lang: String)
 
-GET        /this-service-has-been-reset                 controllers.SessionExpiredController.onPageLoad
+GET         /this-service-has-been-reset              controllers.SessionExpiredController.onPageLoad
 
-GET        /check-your-answers                          controllers.CheckYourAnswersController.onPageLoad
+GET         /check-your-answers                       controllers.CheckYourAnswersController.onPageLoad
 
-GET        /unauthorised                                controllers.UnauthorisedController.onPageLoad
+GET         /unauthorised                             controllers.UnauthorisedController.onPageLoad
 
-GET        /:origin/beta                                controllers.OtherQuestionsController.onPageLoad(origin: models.Origin)
-POST       /:origin/beta                                controllers.OtherQuestionsController.onSubmit(origin: models.Origin)
+GET         /:origin/beta                             controllers.OtherQuestionsController.onPageLoad(origin: models.Origin)
+POST        /:origin/beta                             controllers.OtherQuestionsController.onSubmit(origin: models.Origin)
 
-GET        /:origin/personal                            controllers.PTAQuestionsController.onPageLoad(origin: models.Origin)
-POST       /:origin/personal                            controllers.PTAQuestionsController.onSubmit(origin: models.Origin)
+GET         /:origin/personal                         controllers.PTAQuestionsController.onPageLoad(origin: models.Origin)
+POST        /:origin/personal                         controllers.PTAQuestionsController.onSubmit(origin: models.Origin)
 
-GET        /:origin/business                            controllers.BTAQuestionsController.onPageLoad(origin: models.Origin)
-POST       /:origin/business                            controllers.BTAQuestionsController.onSubmit(origin: models.Origin)
+GET         /:origin/business                         controllers.BTAQuestionsController.onPageLoad(origin: models.Origin)
+POST        /:origin/business                         controllers.BTAQuestionsController.onSubmit(origin: models.Origin)
 
-GET        /:origin/pension                             controllers.PensionQuestionsController.onPageLoad(origin: models.Origin)
-POST       /:origin/pension                             controllers.PensionQuestionsController.onSubmit(origin: models.Origin)
+GET         /:origin/pension                          controllers.PensionQuestionsController.onPageLoad(origin: models.Origin)
+POST        /:origin/pension                          controllers.PensionQuestionsController.onSubmit(origin: models.Origin)
 
-GET        /eat-out-to-help-out                         controllers.EOTHOQuestionsController.onPageLoad()
-POST       /eat-out-to-help-out                         controllers.EOTHOQuestionsController.onSubmit()
+GET         /eat-out-to-help-out                      controllers.EOTHOQuestionsController.onPageLoad()
+POST        /eat-out-to-help-out                      controllers.EOTHOQuestionsController.onSubmit()
 
-GET        /:origin/give-reason                         controllers.GiveReasonController.onPageLoad(origin: models.Origin)
-POST       /:origin/give-reason                         controllers.GiveReasonController.onSubmit(origin: models.Origin)
+GET         /:origin/give-reason                      controllers.GiveReasonController.onPageLoad(origin: models.Origin)
+POST        /:origin/give-reason                      controllers.GiveReasonController.onSubmit(origin: models.Origin)
 
-GET        /:origin/give-comments                       controllers.GiveCommentsController.onPageLoad(origin: models.Origin)
-POST       /:origin/give-comments                       controllers.GiveCommentsController.onSubmit(origin: models.Origin)
+GET         /:origin/give-comments                    controllers.GiveCommentsController.onPageLoad(origin: models.Origin)
+POST        /:origin/give-comments                    controllers.GiveCommentsController.onSubmit(origin: models.Origin)
 
-GET        /:origin/thank-you                           controllers.ThankYouController.onPageLoadWithOrigin(origin: models.Origin)
-GET        /thank-you                                   controllers.ThankYouController.onPageLoad()
-GET        /thank-you-pension                           controllers.ThankYouController.onPageLoadPension()
+GET         /:origin/thank-you                        controllers.ThankYouController.onPageLoadWithOrigin(origin: models.Origin)
+GET         /thank-you                                controllers.ThankYouController.onPageLoad()
+GET         /thank-you-pension                        controllers.ThankYouController.onPageLoadPension()
 
-GET        /eothoNumberOfEstablishments                 controllers.EothoNumberOfEstablishmentsController.onPageLoad(mode: Mode = NormalMode)
-POST       /eothoNumberOfEstablishments                 controllers.EothoNumberOfEstablishmentsController.onSubmit(mode: Mode = NormalMode)
-GET        /changeEothoNumberOfEstablishments           controllers.EothoNumberOfEstablishmentsController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeEothoNumberOfEstablishments           controllers.EothoNumberOfEstablishmentsController.onSubmit(mode: Mode = CheckMode)
+GET         /eothoNumberOfEstablishments              controllers.EothoNumberOfEstablishmentsController.onPageLoad(mode: Mode = NormalMode)
+POST        /eothoNumberOfEstablishments              controllers.EothoNumberOfEstablishmentsController.onSubmit(mode: Mode = NormalMode)
+GET         /changeEothoNumberOfEstablishments        controllers.EothoNumberOfEstablishmentsController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeEothoNumberOfEstablishments        controllers.EothoNumberOfEstablishmentsController.onSubmit(mode: Mode = CheckMode)
+
+GET         /whichRegion                               controllers.EothoWhichRegionController.onPageLoad(mode: Mode = NormalMode)
+POST        /whichRegion                               controllers.EothoWhichRegionController.onSubmit(mode: Mode = NormalMode)
+GET         /changeWhichRegion                         controllers.EothoWhichRegionController.onPageLoad(mode: Mode = CheckMode)
+POST        /changeWhichRegion                         controllers.EothoWhichRegionController.onSubmit(mode: Mode = CheckMode)
 
 # These routes must come last as they will match any /feedback/xxx route
-GET        /:origin                                     controllers.OtherQuestionsController.onPageLoad(origin: models.Origin)
-POST       /:origin                                     controllers.OtherQuestionsController.onSubmit(origin: models.Origin)
+GET         /:origin                                  controllers.OtherQuestionsController.onPageLoad(origin: models.Origin)
+POST        /:origin                                  controllers.OtherQuestionsController.onSubmit(origin: models.Origin)
 

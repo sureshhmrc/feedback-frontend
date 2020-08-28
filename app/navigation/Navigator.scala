@@ -60,6 +60,9 @@ class EothoNavigator @Inject()() {
   private val normalRoutes: Page => UserAnswers => Call = {
     case EothoNumberOfEstablishmentsPage =>
       _ =>
+        routes.EothoWhichRegionController.onPageLoad(NormalMode)
+    case EothoWhichRegionPage =>
+      _ =>
         routes.CheckYourAnswersController.onPageLoad()
     case _ =>
       _ =>

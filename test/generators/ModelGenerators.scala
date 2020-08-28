@@ -198,4 +198,9 @@ trait ModelGenerators {
     Arbitrary {
       Gen.listOf(whichRegionQuestionGen)
     }
+
+  implicit lazy val arbitraryEothoWhichRegion: Arbitrary[EothoWhichRegion] =
+    Arbitrary {
+      Gen.oneOf(EothoWhichRegion.values)
+    }
 }

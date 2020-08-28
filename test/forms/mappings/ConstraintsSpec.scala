@@ -115,4 +115,17 @@ class ConstraintsSpec extends WordSpec with MustMatchers with Constraints {
       result mustEqual Invalid("error.length", 10)
     }
   }
+
+  "nonEmptySet" must {
+
+    "return Valid if set is nonEmpty" in {
+      val result = nonEmptySet("error.invalid")(Set("non empty"))
+      result mustEqual Valid
+    }
+
+    "return Invalid an empty set" in {
+      val result = nonEmptySet("error.invalid")(Set.empty)
+      result mustEqual Invalid("error.invalid")
+    }
+  }
 }

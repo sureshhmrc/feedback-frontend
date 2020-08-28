@@ -59,7 +59,7 @@ class EOTHOQuestionsViewSpec
       ComparedToThurFriSatSunQuestion.options,
       "eothoQuestions.comparedToThurFriSatSun")
 
-    behave like checkboxPage(form, createViewUsingForm, messageKeyPrefix, WhichRegionQuestion.options, "whichRegions")
+//    behave like checkboxPage(form, createViewUsingForm, messageKeyPrefix, WhichRegionQuestion.options, "whichRegions")
 
     behave like optionsPage(
       createViewUsingForm,

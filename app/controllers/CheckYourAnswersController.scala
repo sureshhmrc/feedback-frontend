@@ -41,7 +41,8 @@ class CheckYourAnswersController @Inject()(
       AnswerSection(
         None,
         Seq(
-          checkYourAnswersHelper.eothoNumberOfEstablishments
+          checkYourAnswersHelper.eothoNumberOfEstablishments,
+          checkYourAnswersHelper.eothoWhichRegion
         ).flatten
       )
     )

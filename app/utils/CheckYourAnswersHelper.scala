@@ -18,7 +18,7 @@ package utils
 
 import controllers.routes
 import models.{CheckMode, UserAnswers}
-import pages.EothoNumberOfEstablishmentsPage
+import pages.{EothoNumberOfEstablishmentsPage, EothoWhichRegionPage}
 import viewmodels.AnswerRow
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers) {
@@ -29,6 +29,15 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers) {
       s"eothoNumberOfEstablishments.$x",
       true,
       routes.EothoNumberOfEstablishmentsController.onPageLoad(CheckMode).url
+    )
+  }
+
+  def eothoWhichRegion: Option[AnswerRow] = userAnswers.get(EothoWhichRegionPage) map { x =>
+    AnswerRow(
+      "eothoWhichRegion.checkYourAnswersLabel",
+      s"eothoWhichRegion.$x",
+      true,
+      routes.EothoWhichRegionController.onPageLoad(CheckMode).url
     )
   }
 }
