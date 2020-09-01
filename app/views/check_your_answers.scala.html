@@ -15,7 +15,9 @@
  *@
 
 @import config.FrontendAppConfig
+@import controllers.routes._
 @import viewmodels.{Section, AnswerSection, RepeaterAnswerSection}
+@import uk.gov.hmrc.play.views.html.helpers
 
 @(appConfig: FrontendAppConfig, answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
 
@@ -24,7 +26,7 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @components.heading("checkYourAnswers.heading")</h1>
+    <h1>@components.heading("checkYourAnswers.heading")</h1>
 
     <p>@messages("checkYourAnswers.guidance")</p>
 
@@ -35,5 +37,9 @@
                 case r: RepeaterAnswerSection => components.repeater_answer_section(r)
             }
         }
+    }
+
+    @helpers.form(action = CheckYourAnswersController.onSubmit, 'autoComplete -> "off") {
+        @components.submit_button()
     }
 }

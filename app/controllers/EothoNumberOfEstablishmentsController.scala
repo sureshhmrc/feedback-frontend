@@ -39,7 +39,6 @@ class EothoNumberOfEstablishmentsController @Inject()(
   navigator: EothoNavigator,
   identify: IdentifierAction,
   getData: DataRetrievalAction,
-  requireData: DataRequiredAction,
   formProvider: EothoNumberOfEstablishmentsFormProvider,
   val controllerComponents: MessagesControllerComponents
 )(implicit ec: ExecutionContext)

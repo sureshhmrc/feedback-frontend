@@ -19,8 +19,12 @@ package controllers
 import com.google.inject.Inject
 import config.FrontendAppConfig
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
+import models.NormalMode
+import navigation.EothoNavigator
+import pages.CheckYourAnswersPage
 import play.api.i18n.I18nSupport
 import play.api.mvc.MessagesControllerComponents
+import services.AuditService
 import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 import utils.CheckYourAnswersHelper
 import viewmodels.AnswerSection
@@ -28,6 +32,8 @@ import views.html.check_your_answers
 
 class CheckYourAnswersController @Inject()(
   appConfig: FrontendAppConfig,
+  auditService: AuditService,
+  navigator: EothoNavigator,
   authenticate: IdentifierAction,
   getData: DataRetrievalAction,
   requireData: DataRequiredAction,
@@ -48,5 +54,10 @@ class CheckYourAnswersController @Inject()(
     )
 
     Ok(check_your_answers(appConfig, sections))
+  }
+
+  def onSubmit() = (authenticate andThen getData andThen requireData) { implicit request =>
+    // TODO: finish off audit, maybe use checkYourAnswer label and answer
+    Redirect(navigator.nextPage(CheckYourAnswersPage, NormalMode, request.userAnswers))
   }
 }

@@ -19,7 +19,7 @@ package controllers
 import play.api.data.Form
 import play.api.libs.json.JsString
 import uk.gov.hmrc.http.cache.client.CacheMap
-import navigation.{FakeEothoNavigator, FakeNavigator}
+import navigation.FakeEothoNavigator
 import connectors.FakeDataCacheConnector
 import controllers.actions._
 import play.api.test.Helpers._
@@ -45,7 +45,6 @@ class EothoNumberOfEstablishmentsControllerSpec extends ControllerSpecBase {
       new FakeEothoNavigator(onwardRoute),
       FakeIdentifierAction,
       dataRetrievalAction,
-      new DataRequiredActionImpl,
       formProvider,
       mcc
     )

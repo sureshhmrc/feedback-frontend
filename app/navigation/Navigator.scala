@@ -51,34 +51,5 @@ object NextPage {
 
 @Singleton
 class Navigator @Inject()() {
-
   def nextPage[A, B](page: A)(b: B)(implicit np: NextPage[A, B]): Call = np.nextPage(page)(b)
-}
-
-@Singleton
-class EothoNavigator @Inject()() {
-  private val normalRoutes: Page => UserAnswers => Call = {
-    case EothoNumberOfEstablishmentsPage =>
-      _ =>
-        routes.EothoWhichRegionController.onPageLoad(NormalMode)
-    case EothoWhichRegionPage =>
-      _ =>
-        routes.CheckYourAnswersController.onPageLoad()
-    case _ =>
-      _ =>
-        routes.EothoNumberOfEstablishmentsController.onPageLoad(NormalMode)
-  }
-
-  private val checkRouteMap: Page => UserAnswers => Call = {
-    case _ =>
-      _ =>
-        routes.CheckYourAnswersController.onPageLoad()
-  }
-
-  def nextPage(page: Page, mode: Mode, userAnswers: UserAnswers): Call = mode match {
-    case NormalMode =>
-      normalRoutes(page)(userAnswers)
-    case CheckMode =>
-      checkRouteMap(page)(userAnswers)
-  }
 }
