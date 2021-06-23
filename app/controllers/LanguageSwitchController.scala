@@ -18,7 +18,7 @@ package controllers
 
 import com.google.inject.Inject
 import play.api.i18n.Lang
-import play.api.mvc.ControllerComponents
+import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.play.language.{LanguageController, LanguageUtils}
 
 class LanguageSwitchController @Inject()(
@@ -31,5 +31,11 @@ class LanguageSwitchController @Inject()(
     "cymraeg" -> Lang("cy")
   )
 
-  override def fallbackURL: String = routes.SessionExpiredController.onPageLoad().url
+  override def switchToLanguage(language: String): Action[AnyContent] = Action { implicit request =>
+    val languageToUse = Lang(language)
+    val redirectURL = request.headers.get(REFERER).getOrElse(fallbackURL)
+    Redirect(redirectURL).withLang(languageToUse)
+  }
+
+  override def fallbackURL: String = routes.FeedbackSurveyController.feedbackHomePageRedirect().url
 }

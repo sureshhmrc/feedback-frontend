@@ -16,12 +16,15 @@
 
 package models
 
+import enumeratum.EnumEntry
 import play.api.libs.json._
 import viewmodels.RadioOption
 
-sealed trait MainServiceQuestion
+import scala.collection.immutable
 
-object MainServiceQuestion {
+sealed trait MainServiceQuestion extends EnumEntry with EnumEntryRadioItemSupport
+
+object MainServiceQuestion extends Enum[MainServiceQuestion] with RadioSupport[MainServiceQuestion] {
 
   case object SelfAssesment extends WithName("SelfAssesment") with MainServiceQuestion
   case object PAYE extends WithName("PAYE") with MainServiceQuestion
@@ -31,10 +34,9 @@ object MainServiceQuestion {
   case object ECSales extends WithName("ECSales") with MainServiceQuestion
   case object Other extends WithName("Other") with MainServiceQuestion
 
-  val values: Seq[MainServiceQuestion] =
-    List(SelfAssesment, PAYE, VAT, CorporationTax, CIS, ECSales, Other)
+  override val values: immutable.IndexedSeq[MainServiceQuestion] = findValues
 
-  val options: Seq[RadioOption] = values.map { value =>
+  val optionsDynamic: Seq[RadioOption] = values.map { value =>
     RadioOption("mainServiceQuestion", value.toString)
   }
 
@@ -57,4 +59,6 @@ object MainServiceQuestion {
       case _                                 => JsError("Unknown MainServiceQuestion")
     }
   }
+
+  override val baseMessageKey: String = "mainServiceQuestion"
 }

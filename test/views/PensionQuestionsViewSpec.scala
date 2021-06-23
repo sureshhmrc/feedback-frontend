@@ -18,18 +18,20 @@ package views
 
 import forms.PensionQuestionsFormProvider
 import models.{HowDoYouFeelQuestion, HowEasyQuestion, LikelyToDoQuestion, PensionQuestions}
+import org.scalatestplus.mockito.MockitoSugar
 import play.api.data.Form
+import play.api.i18n.{Lang, MessagesApi, MessagesImpl}
 import views.behaviours.{OptionsViewBehaviours, StringViewBehaviours, YesNoViewBehaviours}
 import views.html.pensionQuestions
 
 class PensionQuestionsViewSpec
     extends YesNoViewBehaviours[PensionQuestions] with StringViewBehaviours[PensionQuestions]
-    with OptionsViewBehaviours[PensionQuestions] {
+    with OptionsViewBehaviours[PensionQuestions] with MockitoSugar {
 
   val messageKeyPrefix = "pensionQuestions"
 
   val form = new PensionQuestionsFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   lazy val pensionQuestions = inject[pensionQuestions]
 
@@ -47,7 +49,7 @@ class PensionQuestionsViewSpec
     behave like optionsPage(
       createViewUsingForm,
       "howEasyScore",
-      HowEasyQuestion.options,
+      HowEasyQuestion.options(form),
       "pensionQuestions.howEasyScore")
 
     behave like stringPage(createViewUsingForm, "whyGiveScore", "pensionQuestions.whyGiveScore")
@@ -55,13 +57,13 @@ class PensionQuestionsViewSpec
     behave like optionsPage(
       createViewUsingForm,
       "howDoYouFeelScore",
-      HowDoYouFeelQuestion.options,
+      HowDoYouFeelQuestion.options(form),
       "pensionQuestions.howDoYouFeelScore")
 
     behave like optionsPage(
       createViewUsingForm,
       "likelyToDo",
-      LikelyToDoQuestion.options,
+      LikelyToDoQuestion.options(form),
       "pensionQuestions.likelyToDo")
 
     "contain privacy anchor tag" in {

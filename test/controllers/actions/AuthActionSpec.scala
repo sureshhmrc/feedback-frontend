@@ -74,7 +74,7 @@ class AuthActionSpec extends SpecBase {
         val controller = new Harness(authAction)
         val result = controller.onPageLoad()(fakeRequest)
         status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(routes.UnauthorisedController.onPageLoad().url)
+        redirectLocation(result) mustBe Some(routes.FeedbackSurveyController.feedbackHomePageRedirect().url)
       }
     }
 
@@ -87,7 +87,7 @@ class AuthActionSpec extends SpecBase {
         val controller = new Harness(authAction)
         val result = controller.onPageLoad()(fakeRequest)
         status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(routes.UnauthorisedController.onPageLoad().url)
+        redirectLocation(result) mustBe Some(routes.FeedbackSurveyController.feedbackHomePageRedirect().url)
       }
     }
 
@@ -100,7 +100,7 @@ class AuthActionSpec extends SpecBase {
         val controller = new Harness(authAction)
         val result = controller.onPageLoad()(fakeRequest)
         status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(routes.UnauthorisedController.onPageLoad().url)
+        redirectLocation(result) mustBe Some(routes.FeedbackSurveyController.feedbackHomePageRedirect().url)
       }
     }
 
@@ -113,7 +113,7 @@ class AuthActionSpec extends SpecBase {
         val controller = new Harness(authAction)
         val result = controller.onPageLoad()(fakeRequest)
         status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(routes.UnauthorisedController.onPageLoad().url)
+        redirectLocation(result) mustBe Some(routes.FeedbackSurveyController.feedbackHomePageRedirect().url)
       }
     }
 
@@ -126,7 +126,7 @@ class AuthActionSpec extends SpecBase {
         val controller = new Harness(authAction)
         val result = controller.onPageLoad()(fakeRequest)
         status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(routes.UnauthorisedController.onPageLoad().url)
+        redirectLocation(result) mustBe Some(routes.FeedbackSurveyController.feedbackHomePageRedirect().url)
       }
     }
   }

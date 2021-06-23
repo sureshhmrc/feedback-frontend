@@ -1,3 +1,5 @@
+service.name = Feedback Survey
+
 checkYourAnswers.title = Check Your Answers
 checkYourAnswers.heading = Check Your Answers
 checkYourAnswers.guidance = Guidance for check your answers
@@ -35,13 +37,19 @@ site.delete = Remove
 site.edit = Change
 site.hidden-delete = Delete {0}
 site.hidden-edit = Change {0}
-site.no = No
-site.yes = Yes
+site.No = No
+site.Yes = Yes
 site.continue = Continue
 site.sendFeedback = Send feedback
 site.service_name =
 site.sendFeedback = Send feedback
 site.textarea.char_limit = (Limit is {0} characters)
+
+language.cymraeg = Cymraeg
+language.change.cymraeg = Newid yr iaith i’r Gymraeg
+language.english = English
+language.change.english = Change the language to English
+language.switcher = Language switcher
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account

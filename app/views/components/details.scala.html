@@ -14,17 +14,27 @@
  * limitations under the License.
  *@
 
-@import config.FrontendAppConfig
+@this(govukDetails: GovukDetails)
 
-@this(mainTemplate: mainTemplate)
+@(
+        summaryText: String,
+        id: Option[String] = None,
+        open: Boolean = false,
+        classes: Option[String] = None
+)(content: Html)
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
-
-@mainTemplate(
-    title = messages("unauthorised.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
-
-    @components.heading("unauthorised.heading")
-
-}
+<div class="form-group">
+    <details
+    @if(open){ open}
+    @if(id.isDefined){ id="@{id.get}"}
+        class="govuk-details @if(classes){@classes}">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+        @summaryText
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+    @content
+</div>
+    </details>
+</div>

@@ -16,13 +16,14 @@
 
 package models.ccg
 
-import models.{Enumerable, WithName}
-import play.api.libs.json._
-import viewmodels.RadioOption
+import enumeratum.EnumEntry
+import models.{Enum, EnumEntryRadioItemSupport, Enumerable, RadioSupport, WithName}
 
-trait SupportFutureTaxQuestion
+import scala.collection.immutable
 
-object SupportFutureTaxQuestion extends Enumerable.Implicits {
+sealed trait SupportFutureTaxQuestion extends EnumEntry with EnumEntryRadioItemSupport
+
+object SupportFutureTaxQuestion extends Enum[SupportFutureTaxQuestion] with RadioSupport[SupportFutureTaxQuestion] {
 
   case object VeryConfident extends WithName("VeryConfident") with SupportFutureTaxQuestion
   case object FairlyConfident extends WithName("FairlyConfident") with SupportFutureTaxQuestion
@@ -30,13 +31,10 @@ object SupportFutureTaxQuestion extends Enumerable.Implicits {
   case object NotVeryConfident extends WithName("NotVeryConfident") with SupportFutureTaxQuestion
   case object NotAtAllConfident extends WithName("NotAtAllConfident") with SupportFutureTaxQuestion
 
-  val values: Seq[SupportFutureTaxQuestion] =
-    List(VeryConfident, FairlyConfident, Neutral, NotVeryConfident, NotAtAllConfident)
-
-  val options: Seq[RadioOption] = values.map { value =>
-    RadioOption("supportFutureTaxQuestion", value.toString)
-  }
+  override val values: immutable.IndexedSeq[SupportFutureTaxQuestion] = findValues
 
   implicit val enumerable: Enumerable[SupportFutureTaxQuestion] =
     Enumerable(values.map(v => v.toString -> v): _*)
+
+  override val baseMessageKey: String = "supportFutureTaxQuestion"
 }

@@ -15,13 +15,19 @@
  *@
 
 @import config.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import controllers.routes._
 @import models.GiveReason
 @import models.Mode
 @import views.ViewUtils._
 
-@this(mainTemplate: mainTemplate)
+@this(
+    mainTemplate: mainTemplate,
+    formHelper: FormWithCSRF,
+    inputRadioDynamicField: components.inputRadioDynamicField,
+    h1: components.h1,
+    button: components.button,
+    errorSummary:  components.errorSummary
+)
 
 @(appConfig: FrontendAppConfig, form: Form[_], action: Call)(implicit request: Request[_], messages: Messages)
 
@@ -30,13 +36,14 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @helpers.form(action = action, 'autoComplete -> "off", Symbol("data-dynamic-form") -> "true") {
+    @formHelper(action = action, 'autoComplete -> "off", Symbol("data-dynamic-form") -> "true") {
 
-        @components.error_summary(form.errors)
+        @errorSummary(form.errors)
 
-        @components.heading("giveReason.heading")
+        @h1("giveReason.heading")
 
-        @components.input_radio_dynamicField(
+        @inputRadioDynamicField(
+            form = form,
             field = form("value"),
             legend = messages("giveReason.heading"),
             legendClass = Some("visually-hidden"),
@@ -47,6 +54,6 @@
             dynamicFieldLabelClass = None
         )
 
-        @components.submit_button("site.sendFeedback")
+        @button(messages("site.sendFeedback"))
     }
 }

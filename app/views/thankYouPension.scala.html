@@ -16,7 +16,14 @@
 
 @import config.FrontendAppConfig
 
-@this(mainTemplate: mainTemplate)
+@this(
+  mainTemplate: mainTemplate,
+  h1: components.h1,
+  h2: components.h2,
+  h3: components.h3,
+  p: components.p,
+  link: components.link
+)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
@@ -32,21 +39,21 @@
   bodyClasses = Some("full-width")
 ) {
 
-  <div class="grid-row">
+  <div class="govuk-width-container">
 
-    <div class="column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
 
-      @components.heading("thankYou.pension.heading")
+      @h1("thankYou.pension.heading")
 
-      <p>@messages("thankYou.pension.intro")</p>
+      @p(Html(messages("thankYou.pension.intro")))
 
       @appConfig.pensionSignInUrl.map { pensionSignInUrl =>
-        <p>@Html(messages("thankYou.pension.signIn", signInLink))</p>
+        @p(Html(messages("thankYou.pension.signIn", signInLink)))
       }
 
-      <h2>@messages("thankYou.pension.subHeading")</h2>
+      @h2(messages("thankYou.pension.subHeading"))
 
-      <p>@messages("thankYou.pension.subContent")</p>
+      @p(Html(messages("thankYou.pension.subContent")))
 
       @appConfig.pensionRetirementUrl.map { pensionRetirementUrl =>
         <p><a href="@pensionRetirementUrl">@messages("thankYou.pension.retirementLink", pensionRetirementUrl)</a></p>
@@ -54,54 +61,50 @@
 
       @appConfig.urLinkUrl.map { urLinkUrl =>
 
-      <h2>
-        @Html(messages("thankYou.userResearch.intro1",
-        components.anchor(
-        href = appConfig.govUkUrl,
-        messageKey = "thankYou.userResearch.urLinkText")))
-      </h2>
+      @p(Html(messages("thankYou.userResearch.intro1",
+      link(
+      link = appConfig.govUkUrl,
+      messageKey = "thankYou.userResearch.urLinkText"))))
 
-      <p>
-        @Html(messages("thankYou.userResearch.intro2",
-        components.anchor(
-        href = appConfig.govUkUrl,
-        messageKey = "thankYou.userResearch.urLinkText")))
-      </p>
+      @p(Html(messages("thankYou.userResearch.intro2",
+      link(
+      link = appConfig.govUkUrl,
+      messageKey = "thankYou.userResearch.urLinkText"))))
 
-      @components.anchor(
-        href = urLinkUrl,
-          messageKey = "thankYou.userResearch.UrLink"
-        )
+      @p(link(
+      link = urLinkUrl,
+      messageKey = "thankYou.userResearch.UrLink")
+      )
       }
 
     </div>
 
-    <div class="sidebar column-one-third">
+    <div class="govuk-grid-column-one-third">
 
-      <h2>@messages("thankYou.pension.sideBar.header")</h2>
+      @h3(messages("thankYou.pension.sideBar.header"))
 
-      <ul class="sidebar__list">
-        @appConfig.pensionSideBarOneUrl.map { pensionSideBarOneUrl =>
+      <ul class="govuk-list">
+        @appConfig.pensionSideBarOneUrl.map { pensionSideBarOneUrl: String =>
           <li class="sidebar__list-item">
             <a href="@pensionSideBarOneUrl" target="_blank" rel="noopener noreferrer">@messages("thankYou.pension.sideBar.linkOne")</a>
           </li>
         }
-        @appConfig.pensionSideBarTwoUrl.map { pensionSideBarTwoUrl =>
+        @appConfig.pensionSideBarTwoUrl.map { pensionSideBarTwoUrl: String =>
           <li class="sidebar__list-item">
             <a href="@pensionSideBarTwoUrl" target="_blank" rel="noopener noreferrer">@messages("thankYou.pension.sideBar.linkTwo", pensionSideBarTwoUrl)</a>
           </li>
         }
-        @appConfig.pensionSideBarThreeUrl.map { pensionSideBarThreeUrl =>
+        @appConfig.pensionSideBarThreeUrl.map { pensionSideBarThreeUrl: String =>
           <li class="sidebar__list-item">
             <a href="@pensionSideBarThreeUrl" target="_blank" rel="noopener noreferrer">@messages("thankYou.pension.sideBar.linkThree", pensionSideBarThreeUrl)</a>
           </li>
         }
-        @appConfig.pensionSideBarFourUrl.map { pensionSideBarFourUrl =>
+        @appConfig.pensionSideBarFourUrl.map { pensionSideBarFourUrl: String =>
           <li class="sidebar__list-item">
             <a href="@pensionSideBarFourUrl" target="_blank" rel="noopener noreferrer">@messages("thankYou.pension.sideBar.linkFour", pensionSideBarFourUrl)</a>
           </li>
         }
-        @appConfig.pensionSideBarFiveUrl.map { pensionSideBarFiveUrl =>
+        @appConfig.pensionSideBarFiveUrl.map { pensionSideBarFiveUrl: String =>
           <li class="sidebar__list-item">
             <a href="@pensionSideBarFiveUrl" target="_blank" rel="noopener noreferrer">@messages("thankYou.pension.sideBar.linkFive", pensionSideBarFiveUrl)</a>
           </li>

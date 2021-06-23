@@ -66,7 +66,7 @@ trait ModelGenerators {
 
   lazy val otherQuestionsGen: Gen[OtherQuestions] =
     for {
-      ableToDo <- option(arbitrary[Boolean])
+      ableToDo <- option(ableToDoGen)
       howEasy  <- option(howEasyQuestionGen)
       whyScore <- option(arbitrary[String].suchThat(_.nonEmpty))
       howFeel  <- option(howDoYouFeelQuestionGen)
@@ -76,7 +76,7 @@ trait ModelGenerators {
 
   lazy val otherQuestionsEmployeeExpensesBetaGen: Gen[OtherQuestionsEmployeeExpensesBeta] =
     for {
-      ableToDo <- option(arbitrary[Boolean])
+      ableToDo <- option(ableToDoGen)
       howEasy  <- option(howEasyQuestionGen)
       whyScore <- option(arbitrary[String].suchThat(_.nonEmpty))
       howFeel  <- option(howDoYouFeelQuestionGen)
@@ -88,7 +88,7 @@ trait ModelGenerators {
   lazy val ptaQuestionsGen: Gen[PTAQuestions] =
     for {
       neededToDo <- option(arbitrary[String].suchThat(_.nonEmpty))
-      ableToDo   <- option(arbitrary[Boolean])
+      ableToDo   <- option(ableToDoGen)
       howEasy    <- option(howEasyQuestionGen)
       whyScore   <- option(arbitrary[String].suchThat(_.nonEmpty))
       howFeel    <- option(howDoYouFeelQuestionGen)
@@ -100,7 +100,7 @@ trait ModelGenerators {
     for {
       mainService      <- option(mainServiceQuestionGen)
       mainServiceOther <- option(arbitrary[String].suchThat(_.nonEmpty))
-      ableToDo         <- option(arbitrary[Boolean])
+      ableToDo         <- option(ableToDoGen)
       howEasy          <- option(howEasyQuestionGen)
       whyScore         <- option(arbitrary[String].suchThat(_.nonEmpty))
       howFeel          <- option(howDoYouFeelQuestionGen)
@@ -110,7 +110,7 @@ trait ModelGenerators {
 
   lazy val pensionQuestionsGen: Gen[PensionQuestions] =
     for {
-      ableToDo   <- option(arbitrary[Boolean])
+      ableToDo   <- option(ableToDoGen)
       howEasy    <- option(howEasyQuestionGen)
       whyScore   <- option(arbitrary[String].suchThat(_.nonEmpty))
       howFeel    <- option(howDoYouFeelQuestionGen)
@@ -145,6 +145,9 @@ trait ModelGenerators {
 
   lazy val howEasyQuestionGen: Gen[HowEasyQuestion] =
     oneOf(HowEasyQuestion.values)
+
+  lazy val ableToDoGen: Gen[AbleToDo] =
+    oneOf(AbleToDo.values)
 
   lazy val howDoYouFeelQuestionGen: Gen[HowDoYouFeelQuestion] =
     oneOf(HowDoYouFeelQuestion.values)

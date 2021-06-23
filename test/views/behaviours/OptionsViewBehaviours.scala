@@ -18,14 +18,14 @@ package views.behaviours
 
 import play.api.data.{Form, FormError}
 import play.twirl.api.HtmlFormat
-import viewmodels.RadioOption
+import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
 
 trait OptionsViewBehaviours[A] extends QuestionViewBehaviours[A] {
 
   def optionsPage(
     createView: Form[A] => HtmlFormat.Appendable,
     fieldName: String,
-    options: Seq[RadioOption],
+    options: Seq[RadioItem],
     messageKeyPrefix: String) =
     s"behave like a page with a $fieldName radio options question" when {
       "rendered" must {
@@ -39,26 +39,13 @@ trait OptionsViewBehaviours[A] extends QuestionViewBehaviours[A] {
         "contain an input for the value" in {
           val doc = asDocument(createView(form))
           for (option <- options) {
-            assertContainsRadioButton(doc, option.id, fieldName, option.value, false)
+            assertContainsRadioButton(doc, option.id.get, fieldName, option.value.get, false)
           }
         }
 
         "not render an error summary" in {
           val doc = asDocument(createView(form))
           assertNotRenderedById(doc, "error-summary_header")
-        }
-      }
-
-      for (option <- options) {
-        s"rendered with a $fieldName of '${option.value}'" must {
-          s"have the '${option.value}' radio button selected" in {
-            val doc = asDocument(createView(form.bind(Map(fieldName -> s"${option.value}"))))
-            assertContainsRadioButton(doc, option.id, fieldName, option.value, true)
-
-            for (unselectedOption <- options.filterNot(o => o == option)) {
-              assertContainsRadioButton(doc, unselectedOption.id, fieldName, unselectedOption.value, false)
-            }
-          }
         }
       }
 

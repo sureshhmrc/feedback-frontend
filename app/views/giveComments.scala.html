@@ -15,33 +15,39 @@
  *@
 
 @import config.FrontendAppConfig
-@import uk.gov.hmrc.play.views.html._
 @import controllers.routes._
 @import models.Mode
 @import views.ViewUtils._
 
-@this(mainTemplate: mainTemplate)
-
+@this(
+    mainTemplate: mainTemplate,
+    formHelper: FormWithCSRF,
+    h1: components.h1,
+    inputTextArea: components.inputTextArea,
+    button: components.button,
+    errorSummary:  components.errorSummary
+)
 @(appConfig: FrontendAppConfig, form: Form[_], action: Call)(implicit request: Request[_], messages: Messages)
 
 @mainTemplate(
     title = s"${errorPrefix(form)} ${messages("giveComments.title")}",
     appConfig = appConfig,
-    bodyClasses = None) {
+    bodyClasses = None,
+    backUrl = Some("")) {
 
-    @helpers.form(action = action, 'autoComplete -> "off") {
+    @formHelper(action = action, 'autoComplete -> "off") {
 
-        @components.back_link()
+        @errorSummary(form.errors)
 
-        @components.error_summary(form.errors)
-
-        @components.input_textarea(
-          field = form("value"),
-          label = messages("giveComments.heading"),
-          hint = Some(messages("giveComments.intro1")),
-          labelH1 = true
+        @inputTextArea(
+            field = form("whyGiveAnswer"),
+            labelText = messages("giveComments.heading"),
+            labelClass = "govuk-label--m",
+            isPageHeading = true,
+            hintText = messages("giveComments.intro1"),
+            name = "whyGiveAnswer"
         )
 
-        @components.submit_button("site.sendFeedback")
+        @button(messages("site.sendFeedback"))
     }
 }

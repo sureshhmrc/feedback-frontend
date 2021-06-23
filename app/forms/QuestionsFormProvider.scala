@@ -30,7 +30,7 @@ class OtherQuestionsFormProvider @Inject() extends Mappings {
   def apply(): Form[OtherQuestions] =
     Form(
       mapping(
-        "ableToDo"     -> optional(boolean()),
+        "ableToDo"     -> optional(enumerable[AbleToDo]()),
         "howEasyScore" -> optional(enumerable[HowEasyQuestion]()),
         "whyGiveScore" ->
           optional(text("whyGiveScore.error.required")
@@ -46,7 +46,7 @@ class OtherQuestionsEmployeeExpensesBetaFormProvider @Inject() extends Mappings 
   def apply(): Form[OtherQuestionsEmployeeExpensesBeta] =
     Form(
       mapping(
-        "ableToDo"     -> optional(boolean()),
+        "ableToDo"     -> optional(enumerable[AbleToDo]()),
         "howEasyScore" -> optional(enumerable[HowEasyQuestion]()),
         "whyGiveScore" ->
           optional(text("whyGiveScore.error.required")
@@ -68,7 +68,7 @@ class PTAQuestionsFormProvider @Inject() extends Mappings {
         "neededToDo" ->
           optional(text("neededToDo.error.required")
             .verifying(maxLength(maxFieldSizeAbleToDo, "neededToDo.error.maxlength"))),
-        "ableToDo"     -> optional(boolean()),
+        "ableToDo"     -> optional(enumerable[AbleToDo]()),
         "howEasyScore" -> optional(enumerable[HowEasyQuestion]()),
         "whyGiveScore" ->
           optional(text("whyGiveScore.error.required")
@@ -89,7 +89,7 @@ class BTAQuestionsFormProvider @Inject() extends Mappings {
         "mainServiceOther" ->
           optional(text("mainServiceOther.error.required")
             .verifying(maxLength(maxFieldSizeMainServiceOther, "generic.max-characters"))),
-        "ableToDo"     -> optional(boolean()),
+        "ableToDo"     -> optional(enumerable[AbleToDo]()),
         "howEasyScore" -> optional(enumerable[HowEasyQuestion]()),
         "whyGiveScore" ->
           optional(text("whyGiveScore.error.required")
@@ -105,7 +105,7 @@ class PensionQuestionsFormProvider @Inject() extends Mappings {
   def apply(): Form[PensionQuestions] =
     Form(
       mapping(
-        "ableToDo"     -> optional(boolean()),
+        "ableToDo"     -> optional(enumerable[AbleToDo]()),
         "howEasyScore" -> optional(enumerable[HowEasyQuestion]()),
         "whyGiveScore" ->
           optional(text("whyGiveScore.error.required")

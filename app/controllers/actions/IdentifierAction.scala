@@ -46,16 +46,8 @@ class AuthenticatedIdentifierAction @Inject()(
     } recover {
       case _: NoActiveSession =>
         Redirect(config.loginUrl, Map("continue" -> Seq(config.loginContinueUrl)))
-      case _: InsufficientEnrolments =>
-        Redirect(routes.UnauthorisedController.onPageLoad)
-      case _: InsufficientConfidenceLevel =>
-        Redirect(routes.UnauthorisedController.onPageLoad)
-      case _: UnsupportedAuthProvider =>
-        Redirect(routes.UnauthorisedController.onPageLoad)
-      case _: UnsupportedAffinityGroup =>
-        Redirect(routes.UnauthorisedController.onPageLoad)
-      case _: UnsupportedCredentialRole =>
-        Redirect(routes.UnauthorisedController.onPageLoad)
+      case _ =>
+        Redirect(routes.FeedbackSurveyController.feedbackHomePageRedirect())
     }
   }
 
@@ -76,7 +68,7 @@ class SessionIdentifierAction @Inject()(mcc: MessagesControllerComponents)(impli
 
     hc.sessionId match {
       case Some(session) => block(IdentifierRequest(request, session.value))
-      case None          => Future.successful(Redirect(routes.SessionExpiredController.onPageLoad()))
+      case None          => Future.successful(Redirect(routes.FeedbackSurveyController.feedbackHomePageRedirect()))
     }
   }
 

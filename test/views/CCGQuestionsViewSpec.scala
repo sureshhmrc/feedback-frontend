@@ -28,7 +28,7 @@ class CCGQuestionsViewSpec extends StringViewBehaviours[CCGQuestions] with Optio
   val messageKeyPrefix = "ccgQuestions"
 
   val form = new CCGQuestionsFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   lazy val ccgQuestions = inject[ccgQuestions]
 
@@ -43,13 +43,13 @@ class CCGQuestionsViewSpec extends StringViewBehaviours[CCGQuestions] with Optio
     behave like optionsPage(
       createViewUsingForm,
       "treatedProfessionally",
-      TreatedProfessionallyQuestion.options,
+      TreatedProfessionallyQuestion.options(form),
       "ccgQuestions.treatedProfessionally")
 
     behave like optionsPage(
       createViewUsingForm,
       "complianceCheckUnderstanding",
-      ComplianceCheckUnderstandingQuestion.options,
+      ComplianceCheckUnderstandingQuestion.options(form),
       "ccgQuestions.complianceCheckUnderstanding")
 
     behave like stringPage(createViewUsingForm, "whyGiveAnswer", "ccgQuestions.whyGiveAnswer")
@@ -57,7 +57,7 @@ class CCGQuestionsViewSpec extends StringViewBehaviours[CCGQuestions] with Optio
     behave like optionsPage(
       createViewUsingForm,
       "supportFutureTax",
-      SupportFutureTaxQuestion.options,
+      SupportFutureTaxQuestion.options(form),
       "ccgQuestions.supportFutureTax")
 
     "contain second introductory paragraph" in {

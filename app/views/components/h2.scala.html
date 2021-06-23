@@ -14,18 +14,8 @@
  * limitations under the License.
  *@
 
-@import config.FrontendAppConfig
+@this()
 
-@this(mainTemplate: mainTemplate)
+@(msg: String, classes: Option[String] = None, elmId: Option[String] = None)(implicit messages: Messages)
 
-@(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
-
-@mainTemplate(
-    title = messages("sessionExpired.title"),
-    appConfig = appConfig,
-    bodyClasses = None) {
-
-    @components.heading("sessionExpired.heading")
-
-    <p>@messages("sessionExpired.guidance")</p>
-}
+<h2 @elmId.map { i => id="@{i}"} class="@classes.getOrElse("govuk-heading-m")">@messages(msg)</h2>

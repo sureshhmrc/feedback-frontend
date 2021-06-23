@@ -27,7 +27,7 @@ class GiveCommentsViewSpec extends StringViewBehaviours[BTAQuestions] {
   val messageKeyPrefix = "giveComments"
 
   val form = new BTAQuestionsFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   def createView = () => createViewUsingForm(form)
 

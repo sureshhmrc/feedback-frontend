@@ -16,12 +16,15 @@
 
 package models.ccg
 
-import models.{Enumerable, WithName}
-import viewmodels.RadioOption
+import enumeratum.EnumEntry
+import models.{Enum, EnumEntryRadioItemSupport, Enumerable, RadioSupport, WithName}
 
-sealed trait ComplianceCheckUnderstandingQuestion
+import scala.collection.immutable
 
-object ComplianceCheckUnderstandingQuestion extends Enumerable.Implicits {
+sealed trait ComplianceCheckUnderstandingQuestion extends EnumEntry with EnumEntryRadioItemSupport
+
+object ComplianceCheckUnderstandingQuestion
+    extends Enum[ComplianceCheckUnderstandingQuestion] with RadioSupport[ComplianceCheckUnderstandingQuestion] {
 
   case object VeryEasy extends WithName("VeryEasy") with ComplianceCheckUnderstandingQuestion
   case object Easy extends WithName("Easy") with ComplianceCheckUnderstandingQuestion
@@ -30,13 +33,9 @@ object ComplianceCheckUnderstandingQuestion extends Enumerable.Implicits {
   case object Difficult extends WithName("Difficult") with ComplianceCheckUnderstandingQuestion
   case object VeryDifficult extends WithName("VeryDifficult") with ComplianceCheckUnderstandingQuestion
 
-  val values: Seq[ComplianceCheckUnderstandingQuestion] =
-    List(VeryEasy, Easy, NeitherEasyOrDifficult, Difficult, VeryDifficult)
-
-  val options: Seq[RadioOption] = values.map { value =>
-    RadioOption("complianceCheckUnderstandingQuestion", value.toString)
-  }
+  override val values: immutable.IndexedSeq[ComplianceCheckUnderstandingQuestion] = findValues
 
   implicit val enumerable: Enumerable[ComplianceCheckUnderstandingQuestion] =
     Enumerable(values.map(v => v.toString -> v): _*)
+  override val baseMessageKey: String = "complianceCheckUnderstandingQuestion"
 }

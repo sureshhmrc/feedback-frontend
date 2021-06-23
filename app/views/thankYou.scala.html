@@ -16,7 +16,13 @@
 
 @import config.FrontendAppConfig
 
-@this(mainTemplate: mainTemplate)
+@this(
+    mainTemplate: mainTemplate,
+    h1: components.h1,
+    h2: components.h2,
+    p: components.p,
+    link: components.link
+)
 
 @(appConfig: FrontendAppConfig)(implicit request: Request[_], messages: Messages)
 
@@ -25,29 +31,25 @@
     appConfig = appConfig,
     bodyClasses = None) {
 
-    @components.heading("thankYou.heading")
+    @h1("thankYou.heading")
 
-    <p>@messages("thankYou.intro")</p>
+    @p(Html(messages("thankYou.intro")))
 
     @appConfig.urLinkUrl.map { urLinkUrl =>
 
-        <h2>
-            @Html(messages("thankYou.userResearch.intro1",
-                components.anchor(
-                    href = appConfig.govUkUrl,
-                    messageKey = "thankYou.userResearch.urLinkText")))
-        </h2>
+        @p(Html(messages("thankYou.userResearch.intro1",
+                link(
+                    link = appConfig.govUkUrl,
+                    messageKey = "thankYou.userResearch.urLinkText"))))
 
-        <p>
-            @Html(messages("thankYou.userResearch.intro2",
-                components.anchor(
-                    href = appConfig.govUkUrl,
-                    messageKey = "thankYou.userResearch.urLinkText")))
-        </p>
+        @p(Html(messages("thankYou.userResearch.intro2",
+            link(
+                link = appConfig.govUkUrl,
+                messageKey = "thankYou.userResearch.urLinkText"))))
 
-        @components.anchor(
-            href = urLinkUrl,
-            messageKey = "thankYou.userResearch.UrLink"
+        @p(link(
+            link = urLinkUrl,
+            messageKey = "thankYou.userResearch.UrLink")
         )
     }
 }

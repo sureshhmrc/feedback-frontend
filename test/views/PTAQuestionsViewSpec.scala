@@ -29,7 +29,7 @@ class PTAQuestionsViewSpec
   val messageKeyPrefix = "ptaQuestions"
 
   val form = new PTAQuestionsFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   lazy val ptaQuestions = inject[ptaQuestions]
 
@@ -49,14 +49,18 @@ class PTAQuestionsViewSpec
 
     behave like yesNoPage(createViewUsingForm, "ableToDo", "ptaQuestions.ableToDo")
 
-    behave like optionsPage(createViewUsingForm, "howEasyScore", HowEasyQuestion.options, "ptaQuestions.howEasyScore")
+    behave like optionsPage(
+      createViewUsingForm,
+      "howEasyScore",
+      HowEasyQuestion.options(form),
+      "ptaQuestions.howEasyScore")
 
     behave like stringPage(createViewUsingForm, "whyGiveScore", "ptaQuestions.whyGiveScore")
 
     behave like optionsPage(
       createViewUsingForm,
       "howDoYouFeelScore",
-      HowDoYouFeelQuestion.options,
+      HowDoYouFeelQuestion.options(form),
       "ptaQuestions.howDoYouFeelScore")
 
     "contain second introductory paragraph" in {

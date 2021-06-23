@@ -31,7 +31,7 @@ class DataRequiredActionImpl @Inject()(implicit ec: ExecutionContext) extends Da
     implicit val hc = HeaderCarrierConverter.fromRequestAndSession(request, request.session)
 
     request.userAnswers match {
-      case None       => Future.successful(Left(Redirect(routes.SessionExpiredController.onPageLoad())))
+      case None       => Future.successful(Left(Redirect(routes.FeedbackSurveyController.feedbackHomePageRedirect())))
       case Some(data) => Future.successful(Right(DataRequest(request.request, request.internalId, data)))
     }
   }

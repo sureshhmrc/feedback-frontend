@@ -35,12 +35,18 @@ site.delete = Remove
 site.edit = Change
 site.hidden-delete = Delete {0}
 site.hidden-edit = Change {0}
-site.no = Na
-site.yes = Iawn
+site.No = Na
+site.Yes = Iawn
 site.continue = Yn eich blaen
 site.sendFeedback = Anfon adborth
 site.service_name =
 site.textarea.char_limit = (Limit is {0} characters)
+
+language.cymraeg = Cymraeg
+language.change.cymraeg = Newid yr iaith i’r Gymraeg
+language.english = English
+language.change.english = Newid yr iaith i Saesneg
+language.switcher = Newid yr iaith
 
 unauthorised.title = You can’t access this service with this account
 unauthorised.heading = You can’t access this service with this account

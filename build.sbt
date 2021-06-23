@@ -24,10 +24,16 @@ lazy val root = (project in file("."))
     ScoverageKeys.coverageExcludedFiles := "<empty>;Reverse.*;.*filters.*;.*handlers.*;.*components.*;.*repositories.*;" +
       ".*BuildInfo.*;.*javascript.*;.*FrontendAuditConnector.*;.*Routes.*;.*GuiceInjector;" +
       ".*ControllerConfiguration;.*LanguageSwitchController",
-    ScoverageKeys.coverageMinimum := 80,
+    ScoverageKeys.coverageMinimumStmtTotal := 80,
     ScoverageKeys.coverageFailOnMinimum := true,
     ScoverageKeys.coverageHighlighting := true,
     libraryDependencies ++= AppDependencies(),
+    TwirlKeys.templateImports ++= Seq(
+      "uk.gov.hmrc.govukfrontend.views.html.components._",
+      "uk.gov.hmrc.govukfrontend.views.html.helpers._",
+      "uk.gov.hmrc.hmrcfrontend.views.html.components._",
+      "uk.gov.hmrc.hmrcfrontend.views.html.helpers._"
+    ),
     retrieveManaged := true,
     scalafmtOnCompile := true,
     evictionWarningOptions in update :=
@@ -35,11 +41,6 @@ lazy val root = (project in file("."))
     fork in Test := true,
     resolvers ++= Seq(
       Resolver.jcenterRepo
-    ),
-    // concatenate js
-    Concat.groups := Seq(
-      "javascripts/feedbackfrontend-app.js" ->
-        group(Seq("javascripts/feedbackfrontend.js"))
     ),
     // prevent removal of unused code which generates warning errors due to use of third-party libs
     uglifyCompressOptions := Seq("unused=false", "dead_code=false"),

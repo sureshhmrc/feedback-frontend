@@ -38,8 +38,8 @@ class AuditService @Inject()(auditConnector: AuditConnector)(implicit ex: Execut
     _ + ("feedbackId" -> feedbackId.value)
   def withNeededToDo(neededToDo: Option[String]): MapCont =
     _ + ("neededToDo" -> neededToDo.getOrElse("-"))
-  def withAbleToDo(ableToDo: Option[Boolean]): MapCont =
-    _ + ("ableToDo" -> ableToDo.map(boolToInt(_).toString).getOrElse("-"))
+  def withAbleToDo(ableToDo: Option[AbleToDo]): MapCont =
+    _ + ("ableToDo" -> ableToDo.map(_.value.toString).getOrElse("-"))
   def withHowEasyScore(howEasy: Option[HowEasyQuestion]): MapCont =
     _ + ("howEasyScore" -> howEasy.map(_.value.toString).getOrElse("-"))
   def withWhyGiveScore(whyScore: Option[String]): MapCont =

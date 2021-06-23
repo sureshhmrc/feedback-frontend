@@ -20,7 +20,7 @@ import models.ccg._
 import play.api.libs.json.{Format, Json}
 
 case class OtherQuestions(
-  ableToDo: Option[Boolean],
+  ableToDo: Option[AbleToDo],
   howEasyScore: Option[HowEasyQuestion],
   whyGiveScore: Option[String],
   howDoYouFeelScore: Option[HowDoYouFeelQuestion]
@@ -31,7 +31,7 @@ object OtherQuestions {
 }
 
 case class OtherQuestionsEmployeeExpensesBeta(
-  ableToDo: Option[Boolean],
+  ableToDo: Option[AbleToDo],
   howEasyScore: Option[HowEasyQuestion],
   whyGiveScore: Option[String],
   howDoYouFeelScore: Option[HowDoYouFeelQuestion],
@@ -45,7 +45,7 @@ object OtherQuestionsEmployeeExpensesBeta {
 
 case class PTAQuestions(
   neededToDo: Option[String],
-  ableToDo: Option[Boolean],
+  ableToDo: Option[AbleToDo],
   howEasyScore: Option[HowEasyQuestion],
   whyGiveScore: Option[String],
   howDoYouFeelScore: Option[HowDoYouFeelQuestion]
@@ -58,7 +58,7 @@ object PTAQuestions {
 case class BTAQuestions(
   mainService: Option[MainServiceQuestion],
   mainServiceOther: Option[String],
-  ableToDo: Option[Boolean],
+  ableToDo: Option[AbleToDo],
   howEasyScore: Option[HowEasyQuestion],
   whyGiveScore: Option[String],
   howDoYouFeelScore: Option[HowDoYouFeelQuestion]
@@ -69,7 +69,7 @@ object BTAQuestions {
 }
 
 case class PensionQuestions(
-  ableToDo: Option[Boolean],
+  ableToDo: Option[AbleToDo],
   howEasyScore: Option[HowEasyQuestion],
   whyGiveScore: Option[String],
   howDoYouFeelScore: Option[HowDoYouFeelQuestion],

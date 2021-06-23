@@ -17,6 +17,7 @@
 package forms
 
 import forms.behaviours.{BooleanFieldBehaviours, OptionFieldBehaviours, StringFieldBehaviours}
+import models.AbleToDo.to
 import models.{HowDoYouFeelQuestion, HowEasyQuestion, OtherQuestions}
 import play.api.data.FormError
 
@@ -34,7 +35,7 @@ class OtherQuestionsFormProviderSpec
       form,
       fieldName,
       invalidError = FormError(fieldName, invalidError),
-      _.ableToDo
+      _.ableToDo.map(to)
     )
   }
 

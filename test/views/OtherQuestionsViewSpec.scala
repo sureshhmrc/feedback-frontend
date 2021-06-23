@@ -29,7 +29,7 @@ class OtherQuestionsViewSpec
   val messageKeyPrefix = "otherQuestions"
 
   val form = new OtherQuestionsFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   lazy val otherQuestions = inject[otherQuestions]
 
@@ -44,14 +44,18 @@ class OtherQuestionsViewSpec
 
     behave like yesNoPage(createViewUsingForm, "ableToDo", "otherQuestions.ableToDo")
 
-    behave like optionsPage(createViewUsingForm, "howEasyScore", HowEasyQuestion.options, "otherQuestions.howEasyScore")
+    behave like optionsPage(
+      createViewUsingForm,
+      "howEasyScore",
+      HowEasyQuestion.options(form),
+      "otherQuestions.howEasyScore")
 
     behave like stringPage(createViewUsingForm, "whyGiveScore", "otherQuestions.whyGiveScore")
 
     behave like optionsPage(
       createViewUsingForm,
       "howDoYouFeelScore",
-      HowDoYouFeelQuestion.options,
+      HowDoYouFeelQuestion.options(form),
       "otherQuestions.howDoYouFeelScore")
 
     "contain second introductory paragraph" in {

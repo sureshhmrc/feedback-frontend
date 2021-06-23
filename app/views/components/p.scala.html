@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2021 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,21 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package views
+@this()
 
-import views.behaviours.ViewBehaviours
-import views.html.sessionExpired
+@(content: Html, elmId: Option[String] = None)
 
-class SessionExpiredViewSpec extends ViewBehaviours {
-
-  val view = inject[sessionExpired]
-
-  def template = () => view(frontendAppConfig)(fakeRequest, messages)
-
-  "Session Expired view" must {
-
-    behave like normalPage(template, "sessionExpired", "guidance")
-  }
-}
+<p @if(elmId.isDefined){ id="@{elmId.get}"} class="govuk-body">@content</p>

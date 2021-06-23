@@ -31,7 +31,7 @@ class OtherQuestionsEmployeeExpensesBetaViewSpec
   val messageKeyPrefix = "otherQuestionsEmployeeExpensesBeta"
 
   val form = new OtherQuestionsEmployeeExpensesBetaFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   lazy val otherQuestionsEmployeeExpensesBeta = inject[otherQuestionsEmployeeExpensesBeta]
 
@@ -49,7 +49,7 @@ class OtherQuestionsEmployeeExpensesBetaViewSpec
     behave like optionsPage(
       createViewUsingForm,
       "howEasyScore",
-      HowEasyQuestion.options,
+      HowEasyQuestion.options(form),
       "otherQuestionsEmployeeExpensesBeta.howEasyScore")
 
     behave like stringPage(createViewUsingForm, "whyGiveScore", "otherQuestionsEmployeeExpensesBeta.whyGiveScore")
@@ -57,7 +57,7 @@ class OtherQuestionsEmployeeExpensesBetaViewSpec
     behave like optionsPage(
       createViewUsingForm,
       "howDoYouFeelScore",
-      HowDoYouFeelQuestion.options,
+      HowDoYouFeelQuestion.options(form),
       "otherQuestionsEmployeeExpensesBeta.howDoYouFeelScore")
 
     behave like stringPage(createViewUsingForm, "fullName", "otherQuestionsEmployeeExpensesBeta.fullName")

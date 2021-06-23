@@ -29,7 +29,7 @@ class BTAQuestionsViewSpec
   val messageKeyPrefix = "btaQuestions"
 
   val form = new BTAQuestionsFormProvider()()
-  val action = controllers.routes.SessionExpiredController.onPageLoad()
+  val action = controllers.routes.FeedbackSurveyController.feedbackHomePageRedirect
 
   lazy val btaQuestions = inject[btaQuestions]
 
@@ -41,20 +41,28 @@ class BTAQuestionsViewSpec
   "BTAQuestions view" must {
     behave like normalPage(createView, messageKeyPrefix, "intro1", "intro3")
 
-    behave like optionsPage(createViewUsingForm, "mainService", MainServiceQuestion.options, "btaQuestions.mainService")
+    behave like optionsPage(
+      createViewUsingForm,
+      "mainService",
+      MainServiceQuestion.options(form),
+      "btaQuestions.mainService")
 
     behave like stringPage(createViewUsingForm, "mainServiceOther", "btaQuestions.mainService")
 
     behave like yesNoPage(createViewUsingForm, "ableToDo", "btaQuestions.ableToDo")
 
-    behave like optionsPage(createViewUsingForm, "howEasyScore", HowEasyQuestion.options, "btaQuestions.howEasyScore")
+    behave like optionsPage(
+      createViewUsingForm,
+      "howEasyScore",
+      HowEasyQuestion.options(form),
+      "btaQuestions.howEasyScore")
 
     behave like stringPage(createViewUsingForm, "whyGiveScore", "btaQuestions.whyGiveScore")
 
     behave like optionsPage(
       createViewUsingForm,
       "howDoYouFeelScore",
-      HowDoYouFeelQuestion.options,
+      HowDoYouFeelQuestion.options(form),
       "btaQuestions.howDoYouFeelScore")
 
     "contain second introductory paragraph" in {

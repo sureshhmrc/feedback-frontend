@@ -16,13 +16,15 @@
 
 package models.ccg
 
-import models.{Enumerable, WithName}
-import play.api.libs.json._
-import viewmodels.RadioOption
+import enumeratum.EnumEntry
+import models.{Enum, EnumEntryRadioItemSupport, Enumerable, RadioSupport, WithName}
 
-sealed trait TreatedProfessionallyQuestion
+import scala.collection.immutable
 
-object TreatedProfessionallyQuestion extends Enumerable.Implicits {
+sealed trait TreatedProfessionallyQuestion extends EnumEntry with EnumEntryRadioItemSupport
+
+object TreatedProfessionallyQuestion
+    extends Enum[TreatedProfessionallyQuestion] with RadioSupport[TreatedProfessionallyQuestion] {
 
   case object StronglyAgree extends WithName("StronglyAgree") with TreatedProfessionallyQuestion
   case object Agree extends WithName("Agree") with TreatedProfessionallyQuestion
@@ -30,13 +32,9 @@ object TreatedProfessionallyQuestion extends Enumerable.Implicits {
   case object Disagree extends WithName("Disagree") with TreatedProfessionallyQuestion
   case object StronglyDisagree extends WithName("StronglyDisagree") with TreatedProfessionallyQuestion
 
-  val values: Seq[TreatedProfessionallyQuestion] =
-    List(StronglyAgree, Agree, NeitherAgreeNorDisagree, Disagree, StronglyDisagree)
-
-  val options: Seq[RadioOption] = values.map { value =>
-    RadioOption("treatedProfessionallyQuestion", value.toString)
-  }
+  override val values: immutable.IndexedSeq[TreatedProfessionallyQuestion] = findValues
 
   implicit val enumerable: Enumerable[TreatedProfessionallyQuestion] =
     Enumerable(values.map(v => v.toString -> v): _*)
+  override val baseMessageKey: String = "treatedProfessionallyQuestion"
 }

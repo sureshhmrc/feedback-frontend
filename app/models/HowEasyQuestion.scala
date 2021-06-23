@@ -16,14 +16,16 @@
 
 package models
 
+import enumeratum.EnumEntry
 import play.api.libs.json._
-import viewmodels.RadioOption
 
-sealed trait HowEasyQuestion {
+import scala.collection.immutable
+
+sealed trait HowEasyQuestion extends EnumEntry with EnumEntryRadioItemSupport {
   val value: Int
 }
 
-object HowEasyQuestion {
+object HowEasyQuestion extends Enum[HowEasyQuestion] with RadioSupport[HowEasyQuestion] {
 
   case object VeryEasy extends WithName("VeryEasy") with HowEasyQuestion {
     val value = 5
@@ -41,12 +43,7 @@ object HowEasyQuestion {
     val value = 1
   }
 
-  val values: Seq[HowEasyQuestion] =
-    List(VeryEasy, Easy, Moderate, Difficult, VeryDifficult)
-
-  val options: Seq[RadioOption] = values.map { value =>
-    RadioOption("howEasyQuestion", value.toString)
-  }
+  override val values: immutable.IndexedSeq[HowEasyQuestion] = findValues
 
   implicit val enumerable: Enumerable[HowEasyQuestion] =
     Enumerable(values.map(v => v.toString -> v): _*)
@@ -65,4 +62,6 @@ object HowEasyQuestion {
       case _                                => JsError("Unknown howEasyQuestion")
     }
   }
+
+  override val baseMessageKey: String = "howEasyQuestion"
 }
