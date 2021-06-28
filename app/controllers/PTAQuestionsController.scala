@@ -28,7 +28,7 @@ import play.api.mvc.MessagesControllerComponents
 import services.AuditService
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import views.html.ptaQuestions
+import views.html.PtaQuestions
 
 class PTAQuestionsController @Inject()(
   appConfig: FrontendAppConfig,
@@ -36,7 +36,7 @@ class PTAQuestionsController @Inject()(
   formProvider: PTAQuestionsFormProvider,
   auditService: AuditService,
   mcc: MessagesControllerComponents,
-  ptaQuestions: ptaQuestions)
+  ptaQuestions: PtaQuestions)
     extends FrontendController(mcc) with I18nSupport {
 
   val form: Form[PTAQuestions] = formProvider()

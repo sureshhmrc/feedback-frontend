@@ -19,7 +19,16 @@
 @import models.{HowDoYouFeelQuestion, HowEasyQuestion}
 @import views.ViewUtils._
 
-@this(mainTemplate: mainTemplate)
+@this(
+    mainTemplate: MainTemplateNew,
+    formHelper: FormWithCSRF,
+    h1: components.h1,
+    p: components.p,
+    inputRadio: components.inputRadio,
+    inputTextArea: components.inputTextArea,
+    button: components.buttonNew,
+    errorSummary:  components.errorSummary
+)
 
 @(appConfig: FrontendAppConfig, form: Form[_], action: Call)(implicit request: Request[_], messages: Messages)
 
@@ -29,48 +38,54 @@
 
 @mainTemplate(
     title = s"${errorPrefix(form)} ${messages("otherQuestions.title")}",
-    appConfig = appConfig,
     bodyClasses = None) {
 
     @helpers.form(action = action, 'autoComplete -> "off") {
 
-        @components.error_summary(form.errors)
+        @errorSummary(form.errors)
 
-        @components.heading("otherQuestions.heading")
+        @h1("otherQuestions.heading")
 
-        <p>@messages("otherQuestions.intro1")</p>
+        @p(Html(messages("otherQuestions.intro1")))
 
-        <p>@Html(messages("otherQuestions.intro2", privacyPolicyLink))</p>
+        @p(Html(messages("otherQuestions.intro2", privacyPolicyLink)))
 
-        <p>@messages("otherQuestions.intro3")</p>
+        @p(Html(messages("otherQuestions.intro3")))
 
-        @components.input_yes_no(
-            field = form("ableToDo"),
-            label = messages("otherQuestions.ableToDo.heading"),
-            labelClass = Some("heading-medium")
+        @inputRadio(
+            form = form,
+            legend = messages("otherQuestions.ableToDo.heading"),
+            items = AbleToDo.options(form),
+            classes = "govuk-fieldset__legend--m",
+            name = "ableToDo"
         )
 
-        @components.input_radio(
-            field = form("howEasyScore"),
+        @inputRadio(
+            form = form,
             legend = messages("otherQuestions.howEasyScore.heading"),
-            legendClass = Some("heading-medium"),
-            inputs = HowEasyQuestion.options
+            items = HowEasyQuestion.options(form),
+            classes = "govuk-fieldset__legend--m",
+            name = "howEasyScore"
         )
 
-        @components.input_textarea(
-            field = form("whyGiveScore"),
+        @inputTextArea(
+            form = form,
+            id = "whyGiveScore",
+            name = "whyGiveScore",
             label = messages("otherQuestions.whyGiveScore.heading"),
-            labelClass = Some("heading-medium"),
-            maximum = Some(1000)
+            labelClass = "govuk-label--m",
+            isPageHeading = false,
+            maxCharacters = Some(1000)
         )
 
-        @components.input_radio(
-            field = form("howDoYouFeelScore"),
+        @inputRadio(
+            form = form,
             legend = messages("otherQuestions.howDoYouFeelScore.heading"),
-            legendClass = Some("heading-medium"),
-            inputs = HowDoYouFeelQuestion.options
+            items = HowDoYouFeelQuestion.options(form),
+            classes = "govuk-fieldset__legend--m",
+            name = "howDoYouFeelScore"
         )
 
-        @components.submit_button()
+        @button(messages("site.continue"))
     }
 }

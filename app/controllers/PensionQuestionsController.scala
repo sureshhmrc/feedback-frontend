@@ -28,7 +28,7 @@ import play.api.mvc.MessagesControllerComponents
 import services.AuditService
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendController
 
-import views.html.pensionQuestions
+import views.html.{PensionQuestions => PensionQuestionsView}
 
 class PensionQuestionsController @Inject()(
   appConfig: FrontendAppConfig,
@@ -36,7 +36,7 @@ class PensionQuestionsController @Inject()(
   formProvider: PensionQuestionsFormProvider,
   auditService: AuditService,
   mcc: MessagesControllerComponents,
-  pensionQuestions: pensionQuestions)
+  pensionQuestions: PensionQuestionsView)
     extends FrontendController(mcc) with I18nSupport {
 
   val form: Form[PensionQuestions] = formProvider()

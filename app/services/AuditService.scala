@@ -41,6 +41,8 @@ class AuditService @Inject()(auditConnector: AuditConnector)(implicit ex: Execut
     _ + ("neededToDo" -> neededToDo.getOrElse("-"))
   def withAbleToDo(ableToDo: Option[Boolean]): MapCont =
     _ + ("ableToDo" -> ableToDo.map(boolToInt(_).toString).getOrElse("-"))
+  def withAbleToDoNew(ableToDo: Option[AbleToDo]): MapCont =
+    _ + ("ableToDo" -> ableToDo.map(_.value.toString).getOrElse("-"))
   def withHowEasyScore(howEasy: Option[HowEasyQuestion]): MapCont =
     _ + ("howEasyScore" -> howEasy.map(_.value.toString).getOrElse("-"))
   def withWhyGiveScore(whyScore: Option[String]): MapCont =
@@ -97,7 +99,7 @@ class AuditService @Inject()(auditConnector: AuditConnector)(implicit ex: Execut
       withOrigin(origin) andThen
         withFeedbackId(feedbackId) andThen
         withNeededToDo(questions.neededToDo) andThen
-        withAbleToDo(questions.ableToDo) andThen
+        withAbleToDoNew(questions.ableToDo) andThen
         withHowEasyScore(questions.howEasyScore) andThen
         withWhyGiveScore(questions.whyGiveScore) andThen
         withHowFeelScore(questions.howDoYouFeelScore)
@@ -147,30 +149,12 @@ class AuditService @Inject()(auditConnector: AuditConnector)(implicit ex: Execut
     val auditMap = (
       withOrigin(origin) andThen
         withFeedbackId(feedbackId) andThen
-        withAbleToDo(questions.ableToDo) andThen
+        withAbleToDoNew(questions.ableToDo) andThen
         withHowEasyScore(questions.howEasyScore) andThen
         withWhyGiveScore(questions.whyGiveScore) andThen
         withHowFeelScore(questions.howDoYouFeelScore)
     )(emptyMap)
 
-    auditConnector.sendExplicitAudit(auditType, auditMap)
-  }
-
-  def otherEmployeeExpensesBetaAudit(
-    origin: Origin,
-    feedbackId: FeedbackId,
-    questions: OtherQuestionsEmployeeExpensesBeta)(implicit hc: HeaderCarrier): Unit = {
-
-    val auditMap = (
-      withOrigin(origin) andThen
-        withFeedbackId(feedbackId) andThen
-        withAbleToDo(questions.ableToDo) andThen
-        withHowEasyScore(questions.howEasyScore) andThen
-        withWhyGiveScore(questions.whyGiveScore) andThen
-        withHowFeelScore(questions.howDoYouFeelScore) andThen
-        withFullName(questions.fullName) andThen
-        withEmail(questions.email)
-    )(emptyMap)
     auditConnector.sendExplicitAudit(auditType, auditMap)
   }
 
@@ -180,7 +164,7 @@ class AuditService @Inject()(auditConnector: AuditConnector)(implicit ex: Execut
     val auditMap = (
       withOrigin(origin) andThen
         withFeedbackId(feedbackId) andThen
-        withAbleToDo(questions.ableToDo) andThen
+        withAbleToDoNew(questions.ableToDo) andThen
         withHowEasyScore(questions.howEasyScore) andThen
         withWhyGiveScore(questions.whyGiveScore) andThen
         withHowFeelScore(questions.howDoYouFeelScore) andThen

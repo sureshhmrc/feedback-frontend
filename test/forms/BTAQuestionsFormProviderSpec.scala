@@ -17,7 +17,7 @@
 package forms
 
 import forms.behaviours.{BooleanFieldBehaviours, OptionFieldBehaviours, StringFieldBehaviours}
-import models.{BTAQuestions, HowDoYouFeelQuestion, HowEasyQuestion, MainServiceQuestion}
+import models._
 import play.api.data.FormError
 
 class BTAQuestionsFormProviderSpec
@@ -61,7 +61,7 @@ class BTAQuestionsFormProviderSpec
     behave like booleanField[BTAQuestions](
       form,
       fieldName,
-      invalidError = FormError(fieldName, invalidError),
+      FormError(fieldName, invalidError),
       _.ableToDo
     )
   }

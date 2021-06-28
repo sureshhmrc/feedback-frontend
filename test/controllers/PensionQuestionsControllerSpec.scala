@@ -30,7 +30,7 @@ import play.api.data.Form
 import play.api.mvc.Call
 import play.api.test.Helpers._
 import services.AuditService
-import views.html.pensionQuestions
+import views.html.{PensionQuestions => PensionQuestionsView}
 
 class PensionQuestionsControllerSpec
     extends SpecBase with ScalaCheckPropertyChecks with ModelGenerators with MockitoSugar {
@@ -40,7 +40,7 @@ class PensionQuestionsControllerSpec
   val formProvider = new PensionQuestionsFormProvider()
   val form = formProvider()
   lazy val mockAuditService = mock[AuditService]
-  lazy val pensionQuestions = inject[pensionQuestions]
+  lazy val pensionQuestions = inject[PensionQuestionsView]
 
   def submitCall(origin: Origin) = routes.PensionQuestionsController.onSubmit(origin)
 

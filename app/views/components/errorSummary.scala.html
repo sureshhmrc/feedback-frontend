@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2021 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,21 +12,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package views
+@this(govukErrorSummary: GovukErrorSummary)
 
-import views.behaviours.ViewBehaviours
-import views.html.SessionExpired
+@(errors: Seq[FormError], errorFieldName: Option[String] = None)(implicit messages: Messages)
 
-class SessionExpiredViewSpec extends ViewBehaviours {
-
-  val view = inject[SessionExpired]
-
-  def template = () => view()(fakeRequest, messages)
-
-  "Session Expired view" must {
-
-    behave like normalPage(template, "sessionExpired", "guidance")
-  }
+@if(errors.nonEmpty) {
+    @defining(errors.map { error =>
+        ErrorLink(
+        href = Some(s"#${errorFieldName.getOrElse(error.key)}"),
+        content = Text(messages(error.message, error.args:_*))
+        )
+    }) { errorLinks =>
+        @govukErrorSummary(ErrorSummary(
+        errorList = errorLinks,
+        title = Text(messages("error.summary.title"))
+        ))
+    }
 }

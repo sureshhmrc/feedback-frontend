@@ -16,7 +16,11 @@
 
 package models
 
+import play.api.data.Form
+import play.api.i18n.Messages
 import play.api.libs.json._
+import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
 import viewmodels.RadioOption
 
 sealed trait HowEasyQuestion {
@@ -24,6 +28,8 @@ sealed trait HowEasyQuestion {
 }
 
 object HowEasyQuestion {
+
+  val baseMessageKey: String = "howEasyQuestion"
 
   case object VeryEasy extends WithName("VeryEasy") with HowEasyQuestion {
     val value = 5
@@ -46,6 +52,15 @@ object HowEasyQuestion {
 
   val options: Seq[RadioOption] = values.map { value =>
     RadioOption("howEasyQuestion", value.toString)
+  }
+
+  def options(form: Form[_])(implicit messages: Messages): Seq[RadioItem] = values.map { value =>
+    RadioItem(
+      id = Some(s"$baseMessageKey.${value.toString}"),
+      value = Some(value.toString),
+      content = Text(messages(s"$baseMessageKey.$value")),
+      checked = form(baseMessageKey).value.contains(value.toString)
+    )
   }
 
   implicit val enumerable: Enumerable[HowEasyQuestion] =
