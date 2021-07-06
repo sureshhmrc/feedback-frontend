@@ -68,7 +68,8 @@
             items = AbleToDo.options(form),
             classes = "govuk-fieldset__legend--m",
             name = "ableToDo",
-            inline = true
+            inline = true,
+            legendAsHeading = false
         )
 
         @inputRadio(
@@ -76,7 +77,8 @@
             legend = messages("btaQuestions.howEasyScore.heading"),
             items = HowEasyQuestion.options(form),
             classes = "govuk-fieldset__legend--m",
-            name = "howEasyScore"
+            name = "howEasyScore",
+            legendAsHeading = false
         )
 
          @inputTextArea(
@@ -94,7 +96,8 @@
             legend = messages("btaQuestions.howDoYouFeelScore.heading"),
             items = HowDoYouFeelQuestion.options(form),
             classes = "govuk-fieldset__legend--m",
-            name = "howDoYouFeelScore"
+            name = "howDoYouFeelScore",
+            legendAsHeading = false
         )
 
         @button(messages("site.continue"))
