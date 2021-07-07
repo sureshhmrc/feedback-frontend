@@ -59,7 +59,14 @@
             legend = messages("btaQuestions.mainService.heading"),
             items = MainServiceQuestion.options(form),
             classes = "govuk-fieldset__legend--m",
-            name = "mainService"
+            name = "mainService",
+            conditionalHtml = Some(
+                    govukInput(Input(
+                    id = "mainServiceOther",
+                    name = "mainServiceOther",
+                    label = Label(content = Text(messages("btaQuestions.mainService.label.heading"))),
+                    classes = "govuk-!-width-one-third"))
+            )
         )
 
          @inputRadio(

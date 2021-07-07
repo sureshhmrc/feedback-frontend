@@ -26,7 +26,8 @@
         hint: Option[Content] = None,
         hintClasses: String = "",
         classes: String = "govuk-fieldset__legend--xl",
-        inline: Boolean = false
+        inline: Boolean = false,
+        conditionalHtml: Option[Html] = None
 )(implicit messages: Messages)
 
 @govukRadios(Radios(
@@ -44,12 +45,7 @@
         classes = hintClasses
     )},
     items = items.init ++ items.lastOption.map { input =>
-        input.copy(conditionalHtml = Some(
-        govukInput(Input(
-            id = "mainServiceOther",
-            name = "mainServiceOther",
-            label = Label(content = Text(messages("btaQuestions.mainService.label.heading"))),
-            classes = "govuk-!-width-one-third"))))
+        input.copy(conditionalHtml = conditionalHtml)
     },
     errorMessage = form(name).error.map(err => ErrorMessage(content = Text(messages(err.message, err.args:_*))))
 ))
