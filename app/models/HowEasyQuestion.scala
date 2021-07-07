@@ -56,7 +56,7 @@ object HowEasyQuestion {
 
   def options(form: Form[_])(implicit messages: Messages): Seq[RadioItem] = values.map { value =>
     RadioItem(
-      id = Some(s"$baseMessageKey.${value.toString}"),
+      id = Some(s"$baseMessageKey-${value.toString}"),
       value = Some(value.toString),
       content = Text(messages(s"$baseMessageKey.$value")),
       checked = form(baseMessageKey).value.contains(value.toString)

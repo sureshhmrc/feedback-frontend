@@ -92,7 +92,7 @@ trait OptionsViewBehaviours[A] extends QuestionViewBehaviours[A] {
       "rendered" must {
         "contain a legend for the question" in {
           val doc = asDocument(createView(form))
-          val legends = doc.getElementsByClass("govuk-fieldset__heading")
+          val legends = doc.getElementsByClass("govuk-fieldset__legend govuk-fieldset__legend--m")
           legends.eachText() must contain(messages(s"$messageKeyPrefix.heading"))
         }
 
