@@ -64,7 +64,9 @@
                     govukInput(Input(
                     id = "mainServiceOther",
                     name = "mainServiceOther",
+                    value = form("mainServiceOther").value,
                     label = Label(content = Text(messages("btaQuestions.mainService.label.heading"))),
+                    hint = Some(Hint(content = Text(messages("generic.max-characters", 100)))),
                     classes = "govuk-!-width-one-third",
                     attributes = Map("maxlength" -> "100")))
             )
